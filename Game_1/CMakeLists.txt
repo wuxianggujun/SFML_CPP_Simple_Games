@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.26)
-project(SFML_CPP_Simple_Games LANGUAGES CXX)
+project(Game_1 LANGUAGES CXX)
 
 include(FetchContent)
 FetchContent_Declare(SFML
