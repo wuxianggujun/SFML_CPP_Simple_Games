@@ -18,7 +18,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-window sfml-sys
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 if (WIN32 AND BUILD_SHARED_LIBS)
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:SFML_CPP_Simple_Games> $<TARGET_FILE_DIR:SFML_CPP_Simple_Games> COMMAND_EXPAND_LISTS)
+            COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:Game_1> $<TARGET_FILE_DIR:Game_1> COMMAND_EXPAND_LISTS)
 endif()
 
 install(TARGETS ${PROJECT_NAME})
