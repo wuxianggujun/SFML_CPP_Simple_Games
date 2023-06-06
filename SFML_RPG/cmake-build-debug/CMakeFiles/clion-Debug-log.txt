@@ -1,0 +1,4 @@
+D:\Software\msys64\mingw64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=D:/Software/msys64/mingw64/bin/ninja.exe -DCMAKE_C_COMPILER=D:/Software/msys64/mingw64/bin/cc.exe -DCMAKE_CXX_COMPILER=D:/Software/msys64/mingw64/bin/c++.exe -G Ninja -S C:\Users\WuXiangGuJun\CLionProjects\SFML_CPP_Simple_Games\SFML_RPG -B C:\Users\WuXiangGuJun\CLionProjects\SFML_CPP_Simple_Games\SFML_RPG\cmake-build-debug
+-- Configuring done (2.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: C:/Users/WuXiangGuJun/CLionProjects/SFML_CPP_Simple_Games/SFML_RPG/cmake-build-debug
