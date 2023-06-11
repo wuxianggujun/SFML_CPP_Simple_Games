@@ -9,16 +9,16 @@ private:
 
 protected:
     sf::RenderWindow *window;
-    std::map<std::string, int> *supportKeys;
-    std::map<std::string,int> keyBinds;
+    std::map<std::string, int> *supportedKeys;
+    std::map<std::string, int> keyBinds;
     bool quit;
     //Resources
     std::vector<sf::Texture> textures;
 
-   virtual void initKeyBinds() = 0;
+    virtual void initKeyBinds() = 0;
 
 public:
-    State(sf::RenderWindow *window, std::map<std::string, int> *supportKeys);
+    State(sf::RenderWindow *window, std::map<std::string, int> *supportedKeys);
 
     State();
 

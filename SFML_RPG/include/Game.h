@@ -14,12 +14,13 @@ private:
     float deltaTime;
 
     std::stack<State *> states;
-    std::map<std::string, int> *supportedKeys;
+    std::map<std::string, int> supportedKeys;
 
     void initWindow();
-    void initKeys();
-    void initStates();
 
+    void initKeys();
+
+    void initStates();
 
 
 public:

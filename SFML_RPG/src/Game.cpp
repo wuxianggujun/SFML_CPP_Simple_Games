@@ -24,16 +24,26 @@ void Game::initWindow() {
 }
 
 void Game::initKeys() {
-    this->supportedKeys = new std::map<std::string,int>();
-    this->supportedKeys->emplace("Escape", sf::Keyboard::Key::Escape);
-    this->supportedKeys->emplace("A", sf::Keyboard::Key::A);
-    this->supportedKeys->emplace("D", sf::Keyboard::Key::D);
-    this->supportedKeys->emplace("W", sf::Keyboard::Key::W);
-    this->supportedKeys->emplace("S", sf::Keyboard::Key::S);
+
+    std::ifstream ifs("config/Supported_Keys.ini");
+    if (ifs.is_open()) {
+        std::string key = "";
+        int key_value = 0;
+        while (ifs >> key >> key_value) {
+            this->supportedKeys[key] = key_value;
+        }
+    }
+    ifs.close();
+
+    //DEBUG REMOVE LATER!
+    for (auto i: this->supportedKeys) {
+        std::cout << i.first << " " << i.second << "\n";
+    }
+
 }
 
 void Game::initStates() {
-    states.push(new GameState(window, supportedKeys));
+    states.push(new GameState(window, &supportedKeys));
 }
 
 
@@ -45,7 +55,6 @@ Game::Game() {
 
 Game::~Game() {
     delete this->window;
-    delete this->supportedKeys;
     //删除所有state
     while (!states.empty()) {
         delete states.top();
@@ -98,7 +107,6 @@ void Game::render() {
     //Render Items
     if (!states.empty()) {
         states.top()->render();
-        //states.top()->render(window);
     }
 
     window->display();
