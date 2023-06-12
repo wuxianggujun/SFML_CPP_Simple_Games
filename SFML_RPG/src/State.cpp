@@ -23,3 +23,12 @@ const bool &State::getQuit() const {
     return quit;
 }
 
+void State::updateMousePositions() {
+    this->mousePoScreen = sf::Mouse::getPosition();
+    this->mousePosWindow = sf::Mouse::getPosition(*this->window);
+    //将窗口的像素映射为坐标
+    this->mousePosView = this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window));
+
+
+}
+

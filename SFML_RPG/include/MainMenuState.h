@@ -2,13 +2,15 @@
 #define SFML_RPG_MAINMENUSTATE_H
 
 #include "GameState.h"
+#include "Button.h"
 
 class MainMenuState :public State{
 
 private:
     sf::RectangleShape background;
+    sf::Font font;
 
-
+    void initFonts();
     void initKeyBinds() override;
 
 public:

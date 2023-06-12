@@ -1,8 +1,13 @@
 //
 // Created by WuXiangGuJun on 2023/6/12.
 //
-
 #include "include/MainMenuState.h"
+
+void MainMenuState::initFonts() {
+    if (!this->font.loadFromFile("Fonts/Dosis-Light.ttf")) {
+        throw ("ERROR::MAINMENUSTATE::COULD NOT LOAD FONT");
+    }
+}
 
 void MainMenuState::initKeyBinds() {
 
@@ -17,7 +22,9 @@ void MainMenuState::initKeyBinds() {
     ifs.close();
 }
 
-MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, int> *supportedKeys) : State(window,supportedKeys) {
+MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, int> *supportedKeys) : State(window,
+                                                                                                          supportedKeys) {
+    this->initFonts();
     this->initKeyBinds();
     this->background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
     this->background.setFillColor(sf::Color::Magenta);
@@ -40,8 +47,8 @@ void MainMenuState::updateInput(const float &deltaTime) {
 
 
 void MainMenuState::update(const float &deltaTime) {
+    this->updateMousePositions();
     this->updateInput(deltaTime);
-
 }
 
 void MainMenuState::render(sf::RenderTarget *target) {
@@ -49,6 +56,7 @@ void MainMenuState::render(sf::RenderTarget *target) {
         target = this->window;
     target->draw(background);
 }
+
 
 
 
