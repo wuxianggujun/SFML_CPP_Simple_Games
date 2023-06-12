@@ -1,5 +1,4 @@
 #include "include/Game.h"
-#include "include/GameState.h"
 
 void Game::initWindow() {
     //创建SFML窗口
@@ -43,7 +42,10 @@ void Game::initKeys() {
 }
 
 void Game::initStates() {
+    states.push(new MainMenuState(window, &supportedKeys));
     states.push(new GameState(window, &supportedKeys));
+
+
 }
 
 

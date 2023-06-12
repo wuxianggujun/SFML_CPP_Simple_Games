@@ -1,7 +1,7 @@
 #ifndef SFML_RPG_GAME_H
 #define SFML_RPG_GAME_H
 
-#include "GameState.h"
+#include "MainMenuState.h"
 
 class Game {
 private:

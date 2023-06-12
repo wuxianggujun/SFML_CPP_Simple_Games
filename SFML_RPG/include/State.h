@@ -5,8 +5,6 @@
 
 class State {
 
-private:
-
 protected:
     sf::RenderWindow *window;
     std::map<std::string, int> *supportedKeys;
@@ -18,9 +16,8 @@ protected:
     virtual void initKeyBinds() = 0;
 
 public:
-    State(sf::RenderWindow *window, std::map<std::string, int> *supportedKeys);
 
-    State();
+    State(sf::RenderWindow *window, std::map<std::string, int> *supportedKeys);
 
     virtual ~State();
 
