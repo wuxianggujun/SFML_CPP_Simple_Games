@@ -9,6 +9,24 @@ void MainMenuState::initFonts() {
     }
 }
 
+void MainMenuState::initButtons() {
+    this->buttons["GAME_STATE"] = new Button(
+            100, 100, 150, 50,
+            &this->font, "New Game",
+            sf::Color(70, 70, 70, 200),
+            sf::Color(150, 150, 150, 255),
+            sf::Color(20, 20, 20, 200));
+
+    this->buttons["EXIT_STATE"] = new Button(
+            100, 300, 150, 50,
+            &this->font, "Quit",
+            sf::Color(100, 100, 100, 200),
+            sf::Color(150, 150, 150, 255),
+            sf::Color(20, 20, 20, 200));
+
+}
+
+
 void MainMenuState::initKeyBinds() {
 
     std::ifstream ifs("config/GameState_KeyBinds.ini");
@@ -26,13 +44,21 @@ MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, int
                                                                                                           supportedKeys) {
     this->initFonts();
     this->initKeyBinds();
+    this->initButtons();
+
+
     this->background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
     this->background.setFillColor(sf::Color::Magenta);
 
 }
 
 
-MainMenuState::~MainMenuState() = default;
+MainMenuState::~MainMenuState() {
+    auto it = this->buttons.begin();
+    for (it = this->buttons.begin(); it != this->buttons.end(); ++it) {
+        delete it->second;
+    }
+}
 
 void MainMenuState::endState() {
 
@@ -45,17 +71,47 @@ void MainMenuState::updateInput(const float &deltaTime) {
 
 }
 
+void MainMenuState::updateButtons() {
+    /**
+     * update all the buttons in the state and handles their functionality.
+     */
+    for (auto &it: this->buttons) {
+        it.second->update(this->mousePosView);
+    }
+    //new game
+    if (buttons["GAME_STATE"]->isPressed()) {
+        //states.push(new GameState(window, &supportedKeys));
+    }
+
+    if (buttons["EXIT_STATE"]->isPressed()) {
+        this->quit = true;
+    }
+}
+
 
 void MainMenuState::update(const float &deltaTime) {
     this->updateMousePositions();
     this->updateInput(deltaTime);
+
+    this->updateButtons();
+
+
+}
+
+void MainMenuState::renderButtons(sf::RenderTarget *target) {
+    for (auto &it: this->buttons) {
+        it.second->render(target);
+    }
 }
 
 void MainMenuState::render(sf::RenderTarget *target) {
     if (!target)
         target = this->window;
     target->draw(background);
+    this->renderButtons(target);
 }
+
+
 
 
 

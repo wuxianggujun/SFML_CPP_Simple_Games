@@ -4,29 +4,34 @@
 #include "GameState.h"
 #include "Button.h"
 
-class MainMenuState :public State{
+class MainMenuState : public State {
 
 private:
     sf::RectangleShape background;
     sf::Font font;
 
+    std::map<std::string, Button *> buttons;
+
     void initFonts();
+
     void initKeyBinds() override;
 
+    void initButtons();
+
 public:
-    MainMenuState(sf::RenderWindow *window, std::map<std::string, int>* supportedKeys);
+    MainMenuState(sf::RenderWindow *window, std::map<std::string, int> *supportedKeys);
+
     ~MainMenuState() override;
 
 
     void updateInput(const float &deltaTime) override;
-
+    void updateButtons();
     void update(const float &deltaTime) override;
 
+    void renderButtons(sf::RenderTarget *target = nullptr);
     void render(sf::RenderTarget *target) override;
 
     void endState() override;
-
-
 
 
 };
