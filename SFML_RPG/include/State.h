@@ -8,6 +8,7 @@ private:
 
 
 protected:
+    std::stack<State *> *states;
     sf::RenderWindow *window;
     std::map<std::string, int> *supportedKeys;
     std::map<std::string, int> keyBinds;
@@ -21,12 +22,11 @@ protected:
     std::vector<sf::Texture> textures;
 
 
-
     virtual void initKeyBinds() = 0;
 
 public:
 
-    State(sf::RenderWindow *window, std::map<std::string, int> *supportedKeys);
+    State(sf::RenderWindow *window, std::map<std::string, int> *supportedKeys, std::stack<State *> *states);
 
     virtual ~State();
 

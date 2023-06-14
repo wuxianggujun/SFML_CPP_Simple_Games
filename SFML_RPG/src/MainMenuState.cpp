@@ -29,7 +29,7 @@ void MainMenuState::initButtons() {
 
 void MainMenuState::initKeyBinds() {
 
-    std::ifstream ifs("config/GameState_KeyBinds.ini");
+    std::ifstream ifs("config/MainMenuState_KeyBinds.ini");
     if (ifs.is_open()) {
         std::string key = "";
         std::string key2 = "";
@@ -40,8 +40,9 @@ void MainMenuState::initKeyBinds() {
     ifs.close();
 }
 
-MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, int> *supportedKeys) : State(window,
-                                                                                                          supportedKeys) {
+MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, int> *supportedKeys,
+                             std::stack<State *> *states) : State(window,
+                                                                  supportedKeys, states) {
     this->initFonts();
     this->initKeyBinds();
     this->initButtons();
@@ -62,7 +63,7 @@ MainMenuState::~MainMenuState() {
 
 void MainMenuState::endState() {
 
-    std::cout << "Ending GameState!" << "\n";
+    std::cout << "Ending MainMenuState!" << "\n";
 }
 
 void MainMenuState::updateInput(const float &deltaTime) {
@@ -80,7 +81,7 @@ void MainMenuState::updateButtons() {
     }
     //new game
     if (buttons["GAME_STATE"]->isPressed()) {
-        //states.push(new GameState(window, &supportedKeys));
+        this->states->push(new GameState(this->window, this->supportedKeys, this->states));
     }
 
     if (buttons["EXIT_STATE"]->isPressed()) {

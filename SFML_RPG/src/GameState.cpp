@@ -13,8 +13,9 @@ void GameState::initKeyBinds() {
     ifs.close();
 }
 
-GameState::GameState(sf::RenderWindow *window, std::map<std::string, int> *supportedKeys) : State(window,
-                                                                                                  supportedKeys) {
+GameState::GameState(sf::RenderWindow *window, std::map<std::string, int> *supportedKeys, std::stack<State *> *states)
+        : State(window,
+                supportedKeys, states) {
     this->initKeyBinds();
 }
 

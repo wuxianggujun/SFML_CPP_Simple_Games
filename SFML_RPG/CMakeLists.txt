@@ -8,7 +8,7 @@ FetchContent_Declare(SFML
         GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY  ${CMAKE_SOURCE_DIR}/build)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build)
 
 # 添加源文件目录
 aux_source_directory(src SOURCE_FILES)
@@ -16,13 +16,12 @@ aux_source_directory(src SOURCE_FILES)
 # 添加头文件目录
 include_directories(${PROJECT_SOURCE_DIR})
 
-
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-window sfml-system)
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 if (WIN32 AND BUILD_SHARED_LIBS)
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:SFML_RPG> $<TARGET_FILE_DIR:SFML_RPG> COMMAND_EXPAND_LISTS)
-endif()
+endif ()
 
 install(TARGETS ${PROJECT_NAME})
