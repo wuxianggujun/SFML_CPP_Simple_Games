@@ -1,23 +1,43 @@
 #include "include/Game.h"
 
+void Game::initVariables() {
+    this->window = nullptr;
+    this->fullScreen = false;
+    this->deltaTime = 0.f;
+
+}
+
 void Game::initWindow() {
     //创建SFML窗口
     std::ifstream ifstream("config/Window.ini");
+    this->videoModes = sf::VideoMode::getFullscreenModes();
+
 
     std::string tile = "None";
-    sf::VideoMode window_bounds(1080, 720);
+    sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
     unsigned framerate_limit = 120;
     bool vertical_sync_enabled = false;
+    //无符号抗锯齿级别
+    unsigned antialiasing_level = 0;
 
     if (ifstream.is_open()) {
         std::getline(ifstream, tile);
         ifstream >> window_bounds.width >> window_bounds.height;
+        ifstream >> fullScreen;
         ifstream >> framerate_limit;
         ifstream >> vertical_sync_enabled;
+        ifstream >> antialiasing_level;
     }
     ifstream.close();
+    this->windowSettings.antialiasingLevel = antialiasing_level;
+    if (this->fullScreen)
+        this->window = new sf::RenderWindow(window_bounds, tile,
+                                            sf::Style::Fullscreen,
+                                            windowSettings);
+    else
+        this->window = new sf::RenderWindow(window_bounds, tile, sf::Style::Titlebar | sf::Style::Close,
+                                            windowSettings);
 
-    this->window = new sf::RenderWindow(window_bounds, tile);
     this->window->setFramerateLimit(framerate_limit);
     this->window->setVerticalSyncEnabled(vertical_sync_enabled);
 }
@@ -47,6 +67,7 @@ void Game::initStates() {
 
 
 Game::Game() {
+    this->initVariables();
     this->initWindow();
     this->initKeys();
     this->initStates();
@@ -121,6 +142,7 @@ void Game::run() {
     }
 
 }
+
 
 
 
